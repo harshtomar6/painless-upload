@@ -11,13 +11,12 @@
 	margin-top: 5px;
 	margin-left: 10px;
 	border-radius: 4px;
-	background-color: #A7D46F;
-	border: 1px solid #A7D46F;
 	font-weight: bold;
 }
 
 .form{
-	background-color: #A7D46F;
+	background: -webkit-linear-gradient(left top, #00537E , #3AA17E); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(left top, #00537E , #3AA17E);
 	padding-top: 100px;
 	padding-bottom: 40px;
 	display: flex;
@@ -31,17 +30,21 @@
 	margin: 10px
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3), -5px -5px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
 }
 
 .form-head{
 	padding: 10px 20px;
-	background: #00537E;
-	color: white;
+	background: rgba(255, 255, 255, 0.5);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
 .form-body{
 	background-color: rgba(255, 255, 255, 0.5);
 	padding: 20px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 .form-body a{
@@ -53,10 +56,11 @@
 .form-body input{
 	margin-bottom: 10px;
 	width: 100%;
-	padding: 8px 6px;
-	border: 1px solid #00537E;
-	background-color: rgba(255, 255, 255, 0.1);
-	font-size: 16px;
+	padding: 10px 8px;
+	border: 1px solid #F1F1F1;
+	background-color: #F1F1F1;
+	font-size: 18px;
+	border-radius: 5px;
 }
 
 .form-body input:focus{
@@ -69,10 +73,24 @@
 }
 
 .form-body input[type="submit"]{
-	background-color: #00537E;
-	color: white;
+	background-color: #19215E;
+	border: 1px solid #19215E;
 }
 
 .form-body input[type="submit"]:hover{
 	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-body button{
+	width: 100%;
+	background: #db3236;
+	font-size: 18px;
+	color: white;
+	padding: 10px 8px;
+	border: 1px solid #db3236;
+}
+
+.form-body button:hover{
+	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+	color: white;
 }
