@@ -6,7 +6,7 @@
 	<title>Painless Upload</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="stylesheets/auth.css" rel="stylesheet">
 	<link href="stylesheets/universal.css" rel="stylesheet">
 </head>
@@ -19,20 +19,52 @@
         <h3 class="text-center"><i class="fa fa-user"></i> Sign Up</h3>
       </div>
       <div class="form-body">
-        <form>
-          <input type="text" placeholder="You Name Please">
-          <input type="email" placeholder="Your E-mail here">
-          <input type="password" placeholder="Super Secret password"><br><br>
-					<input type="submit" value="Log In" class="btn btn-success"/>
+        <form action="/signup" method="post">
+          <input type="text" placeholder="You Name Please" name="name" required>
+          <input type="email" placeholder="Your E-mail here" name="email" required>
+          <input type="password" placeholder="Super Secret password" name="password" required><br><br>
+					<input type="submit" value="Create Account" class="btn"/>
+					<div class="loader" style="top: -45px; float: right; right: 20px;"></div>
 					<br>
 					<p class="text-center">OR</p>
-					<button type="button" class="btn"><i class="fa fa-google-plus"></i> Continue with Google</button
-        </form>
+					<button type="button" class="btn"><i class="fa fa-google"></i> Continue with Google</button>
+					<hr>
+					<p class="text-center"><a href="/login">Already have an Account? Login Now</a></p>
+				</form>
       </div>
     </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+
+		$(document).ready(function(){
+
+			$('.form-body form').submit(function(e){
+				e.preventDefault()
+
+				var name = $('input[name="name"]').val()
+				var email = $('input[name="email"]').val()
+				var password = $('input[name="password"]').val()
+
+				$('.loader').css('display', 'block')
+				$.post('/signup', {name: name, email: email, password: password}, (success) => {
+					$('.loader').css('display', 'none')
+
+					$('.form-body form').before(`<div class="alert">
+																				<h4>`+success+`</h4></div>`)
+					if(success === 'Account Created Successfully'){
+						setTimeout(function(){
+							window.location.href= '/login'
+						}, 3000)
+					}
+				})
+
+			})
+
+		})
+
+	</script>
 </body>
 </html>

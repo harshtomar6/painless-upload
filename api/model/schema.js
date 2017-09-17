@@ -2,6 +2,7 @@
 //Dependencies
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
+let bcrypt = require('bcrypt-nodejs')
 
 //pages Schema
 let pageSchema = new Schema({
@@ -10,5 +11,24 @@ let pageSchema = new Schema({
   user: String
 })
 
+//User Schema
+let userSchema = new Schema({
+  name: String,
+  email: String,
+  password: String
+})
+
+//User schema functions
+userSchema.methods.generateHash = (password) => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+}
+
+userSchema.methods.compareHash = (password) => {
+  return bcrypt.compareSync(password, this.password)
+}
+
 //Model this Schema and export this
-module.exports = mongoose.model('Page', pageSchema)
+module.exports = {
+  userSchema,
+  pageSchema
+}
