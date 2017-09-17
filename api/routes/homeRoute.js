@@ -24,6 +24,14 @@ router.get('/', (req, res, next) => {
   res.render('index.ejs')
 })
 
+router.get('/login', (req, res, next) => {
+  res.render('login.ejs')
+})
+
+router.get('/signup', (req, res, next) => {
+  res.render('signup.ejs')
+})
+
 router.get('/upload', (req, res, next) => {
   res.render('upload.ejs')
 })

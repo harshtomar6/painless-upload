@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf">
+	<meta charset="utf">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Painless Upload - Upload Files</title>
+	<title>Painless Upload</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="stylesheets/upload.css" rel="stylesheet">
-  <link href="stylesheets/universal.css" rel="stylesheet">
+	<link href="stylesheets/auth.css" rel="stylesheet">
+	<link href="stylesheets/universal.css" rel="stylesheet">
 </head>
 <body>
   <%- include ../partials/navbar.ejs %>
+
   <div class="container-fluid form">
     <div class="form-wraper">
       <div class="form-head">
-        <h4 class="text-center"><i class="fa fa-upload"></i> Upload Your Files</h4>
+        <h4 class="text-center"><i class="fa fa-sign-in"></i> Log In</h4>
       </div>
       <div class="form-body">
-  	    <form action="/file-upload" enctype="multipart/form-data" method="POST">
-          <input type="text" placeholder="Website name">
-  		    <input type="file" name="file" placeholder="Choose Your File" required/>
-  		    <input type="submit" name="Submit" value="submit" class="btn btn-primary"/>
-  		  </form>
+        <form>
+          <input type="email" placeholder="Your E-mail here" required>
+          <input type="password" placeholder="Super Secret password" required>
+          <a href="/forgot-password"> Forgot Password? </a>
+          <input type="submit" value="Log In"/>
+        </form>
       </div>
     </div>
-	</div>
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
