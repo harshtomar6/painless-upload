@@ -34,6 +34,17 @@ router.get('/login', (req, res, next) => {
   res.render('login.ejs')
 })
 
+//router to handle post request for user login
+router.post('/login', (req, res, next) => {
+  db.authenticateUser(req.body, (err, user) => {
+    if(err)
+      res.send(err)
+    else {
+      res.send(user)
+    }
+  })
+})
+
 //router to render signup page
 router.get('/signup', (req, res, next) => {
   res.render('signup.ejs')

@@ -49,6 +49,8 @@
 				var password = $('input[name="password"]').val()
 
 				$('.loader').css('display', 'block')
+				$('.alert').remove()
+				
 				$.post('/signup', {name: name, email: email, password: password}, (success) => {
 					$('.loader').css('display', 'none')
 

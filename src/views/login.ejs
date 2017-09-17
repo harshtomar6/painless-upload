@@ -20,10 +20,11 @@
       </div>
       <div class="form-body">
         <form>
-          <input type="email" placeholder="Your E-mail here" required>
-          <input type="password" placeholder="Super Secret password" required>
+          <input type="email" placeholder="Your E-mail here" name="email" required>
+          <input type="password" placeholder="Super Secret password" name="password" required>
           <a href="/forgot-password"> Forgot Password? </a><br><br>
           <input type="submit" value="Log In" class="btn"/>
+					<div class="loader" style="top: -45px; float: right; right: 20px;"></div>
 					<br>
 					<p class="text-center">OR</p>
 					<button type="button" class="btn"><i class="fa fa-google-plus"></i>  Continue with Google</button>
@@ -35,5 +36,35 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+
+	$(document).ready(function(){
+
+		$('.form-body form').submit(function(e){
+			e.preventDefault()
+
+			var email = $('input[name="email"]').val()
+			var password = $('input[name="password"]').val()
+
+			$('.loader').css('display', 'block')
+			$('.alert').remove()
+			
+			$.post('/login', { email: email, password: password }, (success) => {
+				$('.loader').css('display', 'none')
+
+				$('.form-body form').before(`<div class="alert">
+																			<h4>`+success+`</h4></div>`)
+				if(success === 'Account Created Successfully'){
+					setTimeout(function(){
+						window.location.href= '/login'
+					}, 3000)
+				}
+			})
+
+		})
+
+	})
+
+	</script>
 </body>
 </html>

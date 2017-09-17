@@ -15,6 +15,7 @@ let pageSchema = new Schema({
 let userSchema = new Schema({
   name: String,
   email: String,
+  username: String,
   password: String
 })
 
@@ -23,7 +24,7 @@ userSchema.methods.generateHash = (password) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
 
-userSchema.methods.compareHash = (password) => {
+userSchema.methods.validatePassword = function(password){
   return bcrypt.compareSync(password, this.password)
 }
 
