@@ -6,6 +6,7 @@ let mongoose = require('mongoose')
 //Models
 var User = mongoose.model('user', Schema.userSchema)
 
+//To add new user
 var createUser = (user, callback) => {
   User.findOne({email: user.email})
     .exec((err, doc) => {
@@ -18,7 +19,7 @@ var createUser = (user, callback) => {
         u.name = user.name
         u.email = user.email
         u.username = user.email.split('@')[0]
-        u.password = u.generateHash(u.password)
+        u.password = u.generateHash(user.password)
 
         u.save((err, success) => {
           return callback(err, success)
@@ -27,17 +28,16 @@ var createUser = (user, callback) => {
     })
 }
 
+//To authenticate user
 var authenticateUser = (user, callback) => {
   User.findOne({ email: user.email })
     .exec((err, doc) => {
       if(err)
         return callback("An Error Occured", null)
 
-      console.log(user.email)
-      console.log(doc)
-
       if(doc){
-        if(doc.validatePassword(user.password))
+        var valid = doc.validatePassword(user.password, doc.password)
+        if(valid)
           return callback(null, doc)
         else
           return callback("Oops! You entered the wrong password", null)
@@ -48,4 +48,12 @@ var authenticateUser = (user, callback) => {
     })
 }
 
-module.exports = { createUser, authenticateUser }
+//Get user data
+var getUser = (id, callback) => {
+  User.findOne({ _id: id })
+    .exec((err, user) => {
+      callback(err, user)
+    })
+}
+
+module.exports = { createUser, authenticateUser, getUser }

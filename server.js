@@ -12,6 +12,7 @@ let config = require('./config/config')
 let apiRoute = require('./api/routes/apiRoute')
 let homeRoute = require('./api/routes/homeRoute')
 let fileRoute = require('./api/routes/fileRoute')
+let userRoute = require('./api/routes/userRoute')
 
 //Listening on port
 const port = process.env.PORT || 3000
@@ -30,7 +31,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 //required for passport
-app.use(session({ secret: config.SESSION_SECRET }))
+app.use(session({ secret: config.SESSION_SECRET, resave: true, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -40,6 +41,8 @@ app.use('/', homeRoute)
 app.use('/api', apiRoute)
 //Use File Route
 app.use('/files', fileRoute)
+//use user route
+app.use('/user', userRoute)
 
 //Listen for http requests at specified port
 app.listen(port, () => {

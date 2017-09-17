@@ -26,12 +26,22 @@ router.use('/', express.static(path.resolve('./src')))
 
 //Root Route for '/'
 router.get('/', (req, res, next) => {
-  res.render('index.ejs')
+  if(req.session.userid){
+
+    db.getUser(req.session.userid, (err, user) => {
+      if(err)
+        res.render('index.ejs', {loggedIn: false, data: null})
+      else
+        res.render('index.ejs', {loggedIn: true, data: user})
+    })
+  }else
+    res.render('index.ejs', {loggedIn: false, data: null})
+
 })
 
 //Router to render login page
 router.get('/login', (req, res, next) => {
-  res.render('login.ejs')
+  res.render('login.ejs', {msg: false, loggedIn: false, data: null})
 })
 
 //router to handle post request for user login
@@ -40,6 +50,7 @@ router.post('/login', (req, res, next) => {
     if(err)
       res.send(err)
     else {
+      req.session.userid = user._id
       res.send(user)
     }
   })
@@ -47,7 +58,7 @@ router.post('/login', (req, res, next) => {
 
 //router to render signup page
 router.get('/signup', (req, res, next) => {
-  res.render('signup.ejs')
+  res.render('signup.ejs', {loggedIn: false, data: null})
 })
 
 //router to handle post request for user signup
@@ -63,7 +74,17 @@ router.post('/signup', (req, res, next) => {
 
 //router to render upload page
 router.get('/upload', (req, res, next) => {
-  res.render('upload.ejs')
+  if(req.session.userid){
+    db.getUser(req.session.userid, (err, user) => {
+      if(err)
+        res.render('upload.ejs', {loggedIn: false, data: null})
+      else
+        res.render('upload.ejs', {loggedIn: true, data: user})
+    })
+  }
+  else {
+    res.render('login.ejs', {msg: 'You need to log in first', loggedIn:false, data:null})
+  }
 })
 
 //router to handle file uploaded page
