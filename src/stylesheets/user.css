@@ -1,0 +1,43 @@
+.container-fluid{
+  padding: 0;
+}
+
+.sidebar{
+  background: -webkit-linear-gradient(left top, #00537E , #3AA17E); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(left top, #00537E , #3AA17E);
+  height: 100%;
+  position: fixed;
+  width: 250px;
+  padding-top: 80px;
+}
+
+.sidebar ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li{
+  list-style-type: none;
+  font-size: 18px;
+  padding: 8px 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar li:hover{
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar ul li i{
+  right: 0;
+  font-size: 28px;
+  position: absolute;
+  color: lightgrey;
+}
+
+.content{
+  background-color: lightgrey;
+  min-height: 100vh;
+  margin-left: 250px;
+  padding-top: 80px;
+}

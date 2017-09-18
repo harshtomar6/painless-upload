@@ -9,11 +9,12 @@ let path = require('path')
 router.use('/', express.static(path.resolve('./uploads')))
 
 router.get('/*', (req, res) => {
-	var fileName = req.path.split('/')[1]
+	var dirName = req.path.split('/')[0]
+	var pageName = req.path.split('/')[1]
 
-	controller.mapFileTo(fileName, (err, content) => {
+	controller.mapFileTo(dirName, pageName, (err, content) => {
 		if(!err)
-			res.sendFile(path.resolve('./uploads/'+content))
+			res.sendFile(path.resolve('./uploads/'+dirName+'/'+pageName+'/'+index.html))
 		else
 			res.send(err)
 	})

@@ -6,6 +6,11 @@ let db = require('./../model/db')
 //Use static data to load css of uploaded files
 router.use('/', express.static(path.resolve('./src')))
 
+router.get('/logout', (req, res) => {
+  req.session.destroy()
+  res.redirect('/')
+})
+
 router.get('/*', (req, res) => {
   if(req.session.userid){
     db.getUser(req.session.userid, (err, user) => {

@@ -5,6 +5,7 @@ let mongoose = require('mongoose')
 
 //Models
 var User = mongoose.model('user', Schema.userSchema)
+var Page = mongoose.model('Page', Schema.pageSchema)
 
 //To add new user
 var createUser = (user, callback) => {
@@ -56,4 +57,24 @@ var getUser = (id, callback) => {
     })
 }
 
-module.exports = { createUser, authenticateUser, getUser }
+//Save Pages data
+var savePageData = (page, callback) => {
+  var page = new Page(page)
+
+  page.save((err, doc) => {
+    callback(err, doc)
+  })
+}
+
+//Get page Data
+var getPageData = (username, callback) => {
+  Page.find({user: username}, (err, pages) => {
+    callback(err, pages)
+  })
+}
+module.exports = {
+                   createUser,
+                   authenticateUser,
+                   getUser,
+                   savePageData
+                 }

@@ -4,13 +4,17 @@ let express = require('express')
 let router = express.Router()
 let multer = require('multer')
 let path = require('path')
+let fs = require('fs')
 let controller = require('./../controllers/mapFile')
 let db = require('./../model/db')
 
 //Configure storage of multer
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads/')
+    var pathToUpload = path.resolve('uploads')+'/'+req.session.username+'/'+req.body.pageName
+    if(!fs.existsSync(pathToUpload))
+      fs.mkdir(pathToUpload)
+    cb(null, './uploads/'+req.session.username+'/'+req.body.pageName)
   },
   //Taking the filename as original
   filename: function (req, file, cb) {
@@ -39,6 +43,19 @@ router.get('/', (req, res, next) => {
 
 })
 
+router.get('/about', (req, res, next) => {
+  if(req.session.userid){
+
+    db.getUser(req.session.userid, (err, user) => {
+      if(err)
+        res.render('about.ejs', {loggedIn: false, data: null})
+      else
+        res.render('about.ejs', {loggedIn: true, data: user})
+    })
+  }else
+    res.render('about.ejs', {loggedIn: false, data: null})
+})
+
 //Router to render login page
 router.get('/login', (req, res, next) => {
   res.render('login.ejs', {msg: false, loggedIn: false, data: null})
@@ -51,6 +68,7 @@ router.post('/login', (req, res, next) => {
       res.send(err)
     else {
       req.session.userid = user._id
+      req.session.username = user.username
       res.send(user)
     }
   })
@@ -67,6 +85,7 @@ router.post('/signup', (req, res, next) => {
     if(err)
       res.send(err)
     else {
+      fs.mkdir(path.resolve('uploads')+'/'+user.username)
       res.send("Account Created Successfully")
     }
   })
@@ -88,9 +107,18 @@ router.get('/upload', (req, res, next) => {
 })
 
 //router to handle file uploaded page
-router.post('/file-upload', upload.single('file'), (req, res, next) => {
-	console.log(req.file)
-	res.send('Your file is available <a href="/files/'+req.file.originalname.split('.')[0]+'">here</a> ')
+router.post('/file-upload', upload.array('file', 10), (req, res, next) => {
+
+  //console.log(req.files)
+  var pageData = {
+    name: req.body.pageName,
+    contents: req.files,
+    user: req.session.username
+  }
+
+  db.savePageData(pageData, (err, doc) => {
+    res.send('Your page is available at <a href="/files/'+req.session.username+'/'+req.body.pageName+'">here</a>')
+  })
 })
 
 //Export the router

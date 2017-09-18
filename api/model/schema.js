@@ -6,8 +6,8 @@ let bcrypt = require('bcrypt-nodejs')
 
 //pages Schema
 let pageSchema = new Schema({
-  fileName: String,
-  fileUrl: String,
+  name: String,
+  contents: Array,
   user: String
 })
 
