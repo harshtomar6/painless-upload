@@ -14,6 +14,14 @@
 	font-weight: bold;
 }
 
+.btn-success{
+	background-color: #2EB872;
+}
+
+.btn-success:hover{
+	background-color: #359768;
+}
+
 .navbar-item p{
 	padding-top: 5px;
 	font-size: 28px;
@@ -72,6 +80,11 @@
 }
 
 .form-body input:focus{
+	outline: none;
+	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-body input:hover{
 	outline: none;
 	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
 }
