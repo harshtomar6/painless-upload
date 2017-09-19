@@ -46,11 +46,36 @@ function displayFiles(filename){
 
 $('#file').on('change', function(e){
   var files = $(this).get(0).files
+
+  //hide info text
+  $('#info').remove()
+
+  //Display uploaded files
   if(!$('#file-display').html())
     $('#upload-wraper').append('<div id="file-display"></div>')
 
+  //Append uploaded files
   for(var i=0;i<files.length;i++){
     console.log(files[i])
     $('#file-display').append(displayFiles(files[i].name))
   }
+
+  //Detect if index.html is uploaded or not
+  var detectIndexFile = 'index.html not found !!'
+  var notFound = true
+  if(notFound)
+    for(var i=0;i<files.length;i++){
+      if(files[i].name == 'index.html'){
+        notFound = false
+        detectIndexFile = 'index.html detected !!'
+      }
+    }
+
+  //Append info div
+  if(!$('#index-display').html())
+    $('#upload-wraper').append('<div id="index-display"><p class="text-center">'+detectIndexFile+'</p></div>')
+  else {
+    $('#index-display p').text(detectIndexFile)
+  }
+
 })

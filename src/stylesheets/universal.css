@@ -172,36 +172,3 @@ hr{
 	margin-top: 5px;
 	cursor: pointer;
 }
-
-#upload-wraper{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	border: 1px solid lightgrey;
-	border-radius: 8px;
-	min-height: 300px;
-	margin: 10px auto;
-}
-
-#file-display{
-	display: flex;
-	justify-content: flex-start;
-	padding: 20px 10px;
-}
-
-.file-card{
-	width: 100px;
-	padding: 0;
-	height: 120px;
-
-}
-
-.file-img img{
-	width: 80px;
-	height: 80px;
-}
-
-.file-name{
-	overflow: hidden;
-}
