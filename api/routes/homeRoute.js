@@ -106,6 +106,20 @@ router.get('/upload', (req, res, next) => {
   }
 })
 
+//router to render explore page
+router.get('/explore', (req, res, next) => {
+  if(req.session.userid){
+    db.getUser(req.session.userid, (err, user) => {
+      if(err)
+        res.render('explore.ejs', {loggedIn: false, data: null})
+      else
+        res.render('explore.ejs', {loggedIn: true, data: user});
+    })
+  }
+  else
+    res.render('explore.ejs', {loggedIn: false, data: null})
+})
+
 //router to handle file uploaded page
 router.post('/file-upload', upload.array('file', 10), (req, res, next) => {
 
