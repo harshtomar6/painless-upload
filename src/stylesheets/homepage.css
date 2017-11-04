@@ -72,7 +72,7 @@ code{
 }
 #second{
 	height: 100vh;
-	background-color: yellow;
+	background-color: #155263;
 }
 
 @keyframes fade{

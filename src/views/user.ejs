@@ -17,10 +17,10 @@
   <div class="container-fluid">
 		<section class="sidebar">
 			<ul>
-				<li><p>Overview  <i class="fa fa-caret-left"></i></p></li>
-				<li><p>My Pages</p></li>
-				<li><p>Profile Settings</p></li>
-				<li><p>Explore</p></li>
+				<li>Overview  <i class="fa fa-caret-left"></i></li>
+				<li>My Pages</li>
+				<li>Profile Settings</li>
+				<li>Explore</li>
 			</ul>
 		</section>
 		<div class="content">
@@ -34,7 +34,7 @@
 
 			$('.sidebar ul li').click(function(){
 				$('.fa-caret-left').remove()
-				$(this).children().append('<i class="fa fa-caret-left"></i>')
+				$(this).append('<i class="fa fa-caret-left"></i>')
 			})
 
 		})
