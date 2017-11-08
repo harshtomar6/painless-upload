@@ -46,7 +46,7 @@ function displayFiles(filename){
 
 $('#file').on('change', function(e){
   var files = $(this).get(0).files
-
+  console.log(files)
   //hide info text
   $('#info').remove()
 

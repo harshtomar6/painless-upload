@@ -14,7 +14,7 @@ router.get('/*', (req, res) => {
 
 	controller.mapFileTo(dirName, pageName, (err, content) => {
 		if(!err)
-			res.sendFile(path.resolve('./uploads/'+dirName+'/'+pageName+'/'+index.html))
+			res.sendFile(path.resolve('./uploads/'+dirName+'/'+pageName+'/index.html'))
 		else
 			res.send(err)
 	})

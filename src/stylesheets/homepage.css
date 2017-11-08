@@ -1,11 +1,11 @@
 #banner{
 	height: 100vh;
 	background: -webkit-linear-gradient(left top, #00537E , #3AA17E); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(left top, #00537E , #3AA17E);
+	background: linear-gradient(left top, #00537E , #3AA17E);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+	justify-content: center;
 }
 
 #banner div{
