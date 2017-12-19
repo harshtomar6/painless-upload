@@ -44,6 +44,7 @@ function displayFiles(filename){
   }
 }
 
+//File Upload
 $('#file').on('change', function(e){
   var files = $(this).get(0).files
   console.log(files)
@@ -79,3 +80,17 @@ $('#file').on('change', function(e){
   }
 
 })
+
+
+//Folder Drop functionality
+var dropArea = document.getElementById('drop-area')
+
+dropArea.ondragover = function(e){
+  e.preventDefault()
+}
+
+dropArea.ondrop =  function(e){
+  e.preventDefault()
+
+  console.log(e.dataTransfer.items);
+}

@@ -21,7 +21,7 @@
       </div>
       <div class="form-body">
 				<%if(msg){%>
-					<div class="alert"><h4><%= msg %></h4></div>
+					<div class="alert"><h4><i class="fa fa-exclamation-triangle"></i><%= msg %></h4></div>
 				<%}%>
         <form>
           <input type="email" placeholder="Your E-mail here" name="email" required>
@@ -62,7 +62,7 @@
 				}else{
 					//display error message
 					$('.form-body form').before(`<div class="alert">
-																				<h4>`+success+`</h4></div>`)
+																				<h4><i class="fa fa-exclamation-triangle"></i>`+success+`</h4></div>`)
 				}
 			})
 
